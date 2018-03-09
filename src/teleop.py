@@ -66,9 +66,9 @@ def vels(target_linear_vel, target_angular_vel):
 if __name__=="__main__":
     settings = termios.tcgetattr(sys.stdin)
 
-    rospy.init_node('turtlebot3_teleop')
-    mux_pub = rospy.Publisher('/mux', Twist, queue_size=5)
-    state_pub = rospy.Publisher('/state', Int32)
+    rospy.init_node('teleop')
+    mux_pub = rospy.Publisher('/mux', Twist, queue_size=1)
+    state_pub = rospy.Publisher('/state', Int32, queue_size=1)
     
 
     status = 0
@@ -80,6 +80,7 @@ if __name__=="__main__":
         print msg
         while(1):
             key = getKey()
+            print(key)
             if key == 'w' :
                 target_linear_vel = target_linear_vel + 0.01
                 status = status + 1
@@ -138,6 +139,6 @@ if __name__=="__main__":
         twist = Twist()
         twist.linear.x = 0; twist.linear.y = 0; twist.linear.z = 0
         twist.angular.x = 0; twist.angular.y = 0; twist.angular.z = 0
-        pub.publish(twist)
+        mux_pub.publish(twist)
 
     termios.tcsetattr(sys.stdin, termios.TCSADRAIN, settings)
