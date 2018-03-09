@@ -67,10 +67,9 @@ if __name__=="__main__":
     settings = termios.tcgetattr(sys.stdin)
 
     rospy.init_node('teleop')
-    mux_pub = rospy.Publisher('/mux', Twist, queue_size=1)
-    state_pub = rospy.Publisher('/state', Int32, queue_size=1)
+    teleop_pub = rospy.Publisher('/teleop', Twist, queue_size=1)
+    state_pub = rospy.Publisher('/teleop/state', Int32, queue_size=1)
     
-
     status = 0
     target_linear_vel = 0
     target_angular_vel = 0
@@ -80,7 +79,6 @@ if __name__=="__main__":
         print msg
         while(1):
             key = getKey()
-            print(key)
             if key == 'w' :
                 target_linear_vel = target_linear_vel + 0.01
                 status = status + 1
@@ -109,6 +107,10 @@ if __name__=="__main__":
                 print vels(0, 0)
                 state_pub.publish(0)
             elif key == 'p':
+            	target_linear_vel   = 0
+                control_linear_vel  = 0
+                target_angular_vel  = 0
+                control_angular_vel = 0
             	state_pub.publish(1)
             elif status == 14 :
                 print msg
@@ -130,15 +132,15 @@ if __name__=="__main__":
             twist = Twist()
             twist.linear.x = control_linear_vel; twist.linear.y = 0; twist.linear.z = 0
             twist.angular.x = 0; twist.angular.y = 0; twist.angular.z = control_angular_vel
-            mux_pub.publish(twist)
+            teleop_pub.publish(twist)
 
     except:
-        print e
+        print "Error!"
 
     finally:
         twist = Twist()
         twist.linear.x = 0; twist.linear.y = 0; twist.linear.z = 0
         twist.angular.x = 0; twist.angular.y = 0; twist.angular.z = 0
-        mux_pub.publish(twist)
+        teleop_pub.publish(twist)
 
     termios.tcsetattr(sys.stdin, termios.TCSADRAIN, settings)
