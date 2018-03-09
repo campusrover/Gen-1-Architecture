@@ -1,3 +1,7 @@
 <launch>
 	<node pkg="campus_rover" type="turtlebot3_teleop_key.py" name="teleop" output="screen" />
+	<node pkg="campus_rover" type="fake_navigation.py" name="fake_navigation" output="screen" />
+	<node pkg="campus_rover" type="driver.py" name="driver" output="screen" />
+	<node pkg="campus_rover" type="mux.py" name="mux" output="screen" />
+	<node pkg="campus_rover" type="state.py" name="state" output="screen" />
 </launch>
