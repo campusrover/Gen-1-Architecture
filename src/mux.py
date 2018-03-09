@@ -22,9 +22,9 @@ def state_determine(msg):
 		mux_state = 1
 	
 	
-state_sub = rospy.Subscriber('state', Int32, state_determine) 
-teleop_sub = rospy.Subscriber('turtlebot3_teleop', Twist, teleop_callback)
-nav_sub = rospy.Subscriber('fake_navigation', Twist, nav_callback)
-command_pub = rospy.Publisher('cmd_vel', Twist, queue_size = 1)
+state_sub = rospy.Subscriber('/state', Int32, state_determine) 
+teleop_sub = rospy.Subscriber('/turtlebot3_teleop', Twist, teleop_callback)
+nav_sub = rospy.Subscriber('/fake_navigation', Twist, nav_callback)
+command_pub = rospy.Publisher('/cmd_vel', Twist, queue_size = 1)
 
 rospy.spin()
