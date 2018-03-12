@@ -9,9 +9,9 @@ Allows the campus rover to be controlled via teleop.
 
 #### Publishers
 
-* `mux`
+* `teleop`
 	* Type: `Twist`
-* `state`
+* `teleop/state`
 	* Type: `Int32`
  
 #### Subscribers
@@ -23,7 +23,7 @@ Subscribes to the `state` node to determine the current state of the robot (tele
 
 #### Publishers
 
-* `driver`
+* `mux`
 	* Type: `Twist` 
 
 #### Subscribers
@@ -56,14 +56,12 @@ Subscribes to the `teleop` and `fake_navigation`. Currently, it receives either 
 
 #### Publishers
 
-* `mux`
+* `state`
 	* Type: `Int32` 
 
 #### Subscribers
 
-* `fake_navigation`
-	* Type: `Int32`
-* `teleop`
+* `teleop/state`
 	* Type: `Int32`
 
 ## fake_navigation
@@ -71,7 +69,7 @@ A placeholder for navigation algorithm. Currently, drives straight only.
 
 
 #### Publishers
-* `mux`
+* `fake_navigation`
 	* Type: `Twist` 
 
 #### Subscribers
