@@ -1,7 +1,11 @@
 <launch>
-	<node pkg="campus_rover" type="teleop.py" name="teleop" output="screen" />
-	<node pkg="campus_rover" type="fake_navigation.py" name="fake_navigation" output="screen" />
-	<node pkg="campus_rover" type="driver.py" name="driver" output="screen" />
-	<node pkg="campus_rover" type="mux.py" name="mux" output="screen" />
-	<node pkg="campus_rover" type="state.py" name="state" output="screen" />
+<<<<<<< HEAD
+	<include file="$(find turtlebot_navigation)/launch/gmapping_demo.launch" />
+	<node pkg="campus_rover" type="teleop.py" name="teleop" output="screen" launch-prefix="gnome-terminal --command" />
+	<remap from="/cmd_vel" to="cmd_vel_mux/input/navi" />
+=======
+    <include file="$(find turtlebot_navigation)/launch/gmapping_demo.launch" />
+    <node pkg="campus_rover" type="teleop.py" name="teleop" output="screen" launch-prefix="gnome-terminal --command" />
+    <remap from="/cmd_vel" to="cmd_vel_mux/input/navi" />
+>>>>>>> 8cc1ccf1e3dc4f24f6986635e58f2a931238f25d
 </launch>
