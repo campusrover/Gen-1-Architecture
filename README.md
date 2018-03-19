@@ -1,6 +1,11 @@
 # Campus Rover Architecture
 The goal of this repository is to design an architecture for the campus rover robot. This robot should be able to deliver small packages by navigating both indoor and outdoor terrain, along with handling issues like opening doors. Upon completion, this repository should provide a skeleton of the campus rover's design.
 
+# Usage
+
+## installation
+To install the package, navigate to your ROS workspace and use the command `git clone https://github.com/campusrover/Gen-1-Architecture.git campus_rover`. After executing this command, navigate to the root of your ROS workspace and run the command `catkin_make`.
+
 # Nodes
 Below are all the nodes used within the campus rover, with documentation for usage.
 
