@@ -1,5 +1,14 @@
 <launch>
-    <include file="$(find turtlebot_navigation)/launch/gmapping_demo.launch" />
-    <node pkg="campus_rover" type="teleop.py" name="teleop" output="screen" launch-prefix="gnome-terminal --command" />
+    
+	<include file="$(find turtlebot_bringup)/launch/minimal.launch" />
+	<include file="$(find turtlebot_bringup)/launch/3dsensor.launch" />
+	<include file="$(find rosbridge_server)/launch/rosbridge_websocket.launch" />
+
+	<node pkg="campus_rover" type="teleop.py" name="teleop" output="screen" launch-prefix="gnome-terminal --command" />
     <remap from="/cmd_vel" to="cmd_vel_mux/input/navi" />
+	
+    <node pkg="web_video_server" type="web_video_server" name="web_video_server" output="screen" launch-prefix="gnome-terminal --command" >
+		<param name="address" type="str" value="129.64.140.214"/>
+	</node>
+
 </launch>
