@@ -70,6 +70,8 @@ if __name__=="__main__":
     teleop_pub = rospy.Publisher('cmd_vel_mux/input/teleop', Twist, queue_size=1)
     state_pub = rospy.Publisher('/teleop/state', Int32, queue_size=1)
 
+    rate = rospy.Rate(10)	
+
     status = 0
     target_linear_vel = 0
     target_angular_vel = 0
@@ -134,6 +136,7 @@ if __name__=="__main__":
             twist.angular.x = 0; twist.angular.y = 0; twist.angular.z = control_angular_vel
             if (target_angular_vel != 0 or target_linear_vel != 0): 
 		teleop_pub.publish(twist)
+        rate.sleep()
 
 
 
