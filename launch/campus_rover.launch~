@@ -9,7 +9,7 @@
 
 	<node pkg="gmapping" type="slam_gmapping" name="slam_gmapping" output="screen" />
 	<node pkg="campus_rover" type="teleop.py" name="teleop" output="screen" launch-prefix="gnome-terminal --command" />
- 	<node pkg="web_video_server" type="web_video_server" name="web_video_server" output="screen" launch-prefix="gnome-terminal --command" >
+  <node pkg="web_video_server" type="web_video_server" name="web_video_server" output="screen" launch-prefix="gnome-terminal --command" >
 		<param name="address" type="str" value="129.64.143.109"/>
 	</node>
 
