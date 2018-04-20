@@ -107,6 +107,7 @@ if __name__=="__main__":
                 print vels(0, 0)
                 state_pub.publish(0)
             elif key == 'p':
+
             	target_linear_vel   = 0
                 control_linear_vel  = 0
                 target_angular_vel  = 0
@@ -132,7 +133,7 @@ if __name__=="__main__":
             twist = Twist()
             twist.linear.x = control_linear_vel; twist.linear.y = 0; twist.linear.z = 0
             twist.angular.x = 0; twist.angular.y = 0; twist.angular.z = control_angular_vel
-            if (target_angular_vel != 0 or target_linear_vel != 0) and :
+            if (target_angular_vel != 0 or target_linear_vel != 0):
 		teleop_pub.publish(twist)
 
 
