@@ -1,0 +1,26 @@
+[
+	{
+		"name": "pito's office",
+		"location": {
+			"x": 1,
+			"y": 2,
+			"z": 0
+		}
+	},
+	{
+		"name": "robotics lab",
+		"location": {
+			"x": 1,
+			"y": 2,
+			"z": 0
+		}
+	},
+	{
+		"name": "volen 101",
+		"location": {
+			"x": 1,
+			"y": 2,
+			"z": 0
+		}
+	}
+]

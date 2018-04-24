@@ -20,8 +20,7 @@ def tag_detection_callback(msg):
 			(0, 0, 0, 1.0),
 			rospy.Time.now(),
 			'camera_rbg_optical_frame',
-			'tag_6'
-			
+			'tag_6'	
 		) 
 		camera_rgb_frame_to_tag_pose = transformer.transformPose('camera_rgb_frame', robot_to_tag_pose)
 		print camera_rbg_frame_to_tag_pose

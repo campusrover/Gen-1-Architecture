@@ -1,3 +1,0 @@
-string location
----
-move_base_msgs/MoveBaseActionGoal waypoint

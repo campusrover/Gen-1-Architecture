@@ -15,6 +15,7 @@ find_package(catkin REQUIRED COMPONENTS
 	actionlib_msgs
 	geometry_msgs
 	message_generation
+	yocs_msgs
 )
 
 ## System dependencies are found with CMake's conventions
@@ -53,15 +54,13 @@ find_package(catkin REQUIRED COMPONENTS
 ## Generate messages in the 'msg' folder
 # add_message_files(
 #   FILES
-#   Message1.msg
-#   Message2.msg
 # )
 
 ## Generate services in the 'srv' folder
- add_service_files(
-   FILES
-   Waypoint.srv
- )
+add_service_files(
+  FILES
+  Waypoints.srv
+)
 
 ## Generate actions in the 'action' folder
 # add_action_files(
@@ -74,9 +73,10 @@ find_package(catkin REQUIRED COMPONENTS
 generate_messages(
   DEPENDENCIES
   std_msgs
-	actionlib_msgs
-	geometry_msgs
-	move_base_msgs
+  actionlib_msgs
+  geometry_msgs
+  move_base_msgs
+  yocs_msgs
 )
 
 ################################################
@@ -109,6 +109,7 @@ generate_messages(
 ## CATKIN_DEPENDS: catkin_packages dependent projects also need
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
+	CATKIN_DEPENDS message_runtime
 #  INCLUDE_DIRS include
 #  LIBRARIES campus_rover
 #  CATKIN_DEPENDS rospy
