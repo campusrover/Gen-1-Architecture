@@ -5,7 +5,8 @@ from std_msgs.msg import Int32
 rospy.init_node('state') 
 
 current_state = 0
-state_change = [[1, 2, 3, 4, 5], [0, 2, 8, 3, 5], [0, 3, 5], [0, 2, 5, 8], [0, 3, 5, 2], [0, 2, 7], [0, 3, 4, 5], [6], [0, 1, 5, 6]]
+#state_change holds all of the legal state changes based on indexes
+state_change = [[1, 8, 4, 6], [8, 5, 6, 2], [8, 3, 0, 6], [8, 5, 2, 1, 6], [8, 1, 6, 5], [8, 1, 6], [8, 5, 7], [0], [3, 5, 1, 4, 6]]
 
 def state_callback(msg):
 	state = msg.data
