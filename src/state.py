@@ -5,59 +5,23 @@ from std_msgs.msg import Int32
 rospy.init_node('state') 
 
 current_state = 0
+state_change = [[1, 2, 3, 4, 5], [0, 2, 8, 3, 5], [0, 3, 5], [0, 2, 5, 8], [0, 3, 5, 2], [0, 2, 7], [0, 3, 4, 5], [6], [0, 1, 5, 6]]
 
 def state_callback(msg):
 	state = msg.data
-	if(current_state == state):
-		# negative feedback
-	elif(state == 0):
-		if(current_state == 1 || current_state == 2 || current_state == 3 || current_state == 4 || current_state == 5):
-			current_state = 0
+
+	if current_state == state:
+		continue
+	else 
+		if state in state_change[current_state]:
+			current_state = state
 		else:
-			# negative feedback
-	elif(state == 1):
-		if(current_state == 0 || current_state == 2 || current_state == 8 || current_state == 3 || current_state == 5):
-			current_state = 1
-		else:
-			# negative feedback
-	elif(state == 2):
-		if(current_state == 0 || current_state == 3 || current_state == 5):
-			current_state = 2
-		else:
-			# negative feedback
-	elif(state == 3):
-		if(current_state == 0 || current_state == 2 || current_state == 5 || current_state == 8):
-			current_state = 3
-		else:
-			# negative feedback
-	elif(state == 4):
-		if(current_state == 0 || current_state == 3 || current_state == 5 || current_state == 2):
-			current_state = 4
-		else:
-			# negative feedback
-	elif(state == 5):
-		if(current_state == 0 || current_state == 2 || current_state == 7):
-			current_state = 5
-		else:
-			# negative feedback
-	elif(state == 6):
-		if(current_state == 0 || current_state == 3 || current_state == 4 || current_state == 5):
-			current_state = 6
-		else:
-			# negative feedback
-	elif(state == 7):
-		if(current_state == 0 || current_state == 6):
-			current_state = 7
-		else:
-			# negative feedback
-	elif(state == 8):
-		if(current_state == 0 || current_state == 1 || current_state == 5 || current_state == 6):
-			current_state = 8
-		else:
-			# negative feedback
+			log_pub.publish('Unable to convert from state %s to state %s' % (current_state, state))
+
 	state_pub.publish(current_state)
 
-teleop_sub = rospy.Subscriber('/teleop/state', Int32, state_callback)
+teleop_sub = rospy.Subscriber('/state', Int32, state_callback)
 state_pub = rospy.Publisher('/state', Int32, queue_size=1)
+log_pub = rospy.Publisher('/state/log', String, queue_size=1)
 
 rospy.spin()
