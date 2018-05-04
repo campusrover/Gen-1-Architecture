@@ -9,31 +9,31 @@ To install the package, navigate to your ROS workspace and use the command `git 
 # States
 In order to get that status of the robot, the campus rover can be in the following states:
 
-## 0 - Awaiting Task
+### 0 - Awaiting Task
 The robot currently has no task, and is awaiting being summoned
 
-## 1 - Summoned
+### 1 - Summoned
 A user has sent the robot to their location
 
-## 2 - Awaiting Destination
+### 2 - Awaiting Destination
 The robot has arrived at the user, and is awaiting a destination to be dispatched to
 
-## 3 - Delivering
+### 3 - Delivering
 A delivery is in progress
 
-## 4 - Return Home
+### 4 - Return Home
 The robot currently has no task, and it returning home to await a new task
 
-## 5 - Stuck
+### 5 - Stuck
 The robot is en route to a destination or home, but it currently stuck
 
-## 6 - Low Charge
+### 6 - Low Charge
 The robot's battery is too low to carry out any tasks and is returning home to charge
 
-## 7 - Charging
+### 7 - Charging
 The robot is on the charger
 
-## 8 - Teleop
+### 8 - Teleop
 The user is currently controlling the robot via teleoperation
 
 # Nodes
