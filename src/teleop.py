@@ -35,7 +35,7 @@ from std_msgs.msg import Int32
 import sys, select, termios, tty
 
 msg = """
-Control Your Turtlebot3!
+Control Your Turtlebot!
 ---------------------------
 Moving around:
         w
@@ -48,6 +48,8 @@ space key, s : force stop
 
 CTRL-C to quit
 """
+
+current_state = -1
 
 def getKey():
     tty.setraw(sys.stdin.fileno())
@@ -62,15 +64,20 @@ def getKey():
 
 def vels(target_linear_vel, target_angular_vel):
     return "currently:\tlinear vel %s\t angular vel %s " % (target_linear_vel,target_angular_vel)
+    
+def state_callback(msg):
+	current_state = msg.data
 
 if __name__=="__main__":
     settings = termios.tcgetattr(sys.stdin)
 
     rospy.init_node('teleop')
     teleop_pub = rospy.Publisher('cmd_vel_mux/input/teleop', Twist, queue_size=1)
-    state_pub = rospy.Publisher('/teleop/state', Int32, queue_size=1)
+    state_pub = rospy.Publisher('/campus_rover/state', Int32, queue_size=1)
+    state_sub = rospy.Subscriber('/campus_rover/state', Int32, state_callback)
 
-    rate = rospy.Rate(10)	
+    rate = rospy.Rate(10)
+    long_rate = rospy.Rate(100)	
 
     status = 0
     target_linear_vel = 0
@@ -81,6 +88,7 @@ if __name__=="__main__":
         print msg
         while(1):
             key = getKey()
+            
             if key == 'w' :
                 target_linear_vel = target_linear_vel + 0.01
                 status = status + 1
@@ -107,17 +115,7 @@ if __name__=="__main__":
                 target_angular_vel  = 0
                 control_angular_vel = 0
                 print vels(0, 0)
-                state_pub.publish(0)
-            elif key == 'p':
-
-            	target_linear_vel   = 0
-                control_linear_vel  = 0
-                target_angular_vel  = 0
-                control_angular_vel = 0
-            	state_pub.publish(1)
-            elif status == 14 :
-                print msg
-                status = 0
+                state_pub.publish(6)            	
             else:
                 if (key == '\x03'):
                     break
@@ -136,14 +134,16 @@ if __name__=="__main__":
             twist.linear.x = control_linear_vel; twist.linear.y = 0; twist.linear.z = 0
             twist.angular.x = 0; twist.angular.y = 0; twist.angular.z = control_angular_vel
 
-            if (target_angular_vel != 0 or target_linear_vel != 0): 
-		teleop_pub.publish(twist)
+            if (target_angular_vel != 0 or target_linear_vel != 0) and current_state == 0: 
+				teleop_pub.publish(twist)
+				
         rate.sleep()
 
 
 
     except:
-        print "Error!"
+    	e = sys.exc_info()[0]
+        print "Error!: %s" % e
 
     finally:
         twist = Twist()

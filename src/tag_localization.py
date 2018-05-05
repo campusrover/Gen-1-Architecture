@@ -13,7 +13,6 @@ listener = tf.TransformListener()
 def tag_detection_callback(msg):
 	if msg.detections:
 		robot_to_tag_pose = PoseStamped(msg.detections[0].pose.header, msg.detections[0].pose.pose.pose)
-		print robot_to_tag_pose
 		pos = robot_to_tag_pose.pose.position
 		br.sendTransform(
 			(pos.x, pos.y, pos.z),
@@ -23,8 +22,6 @@ def tag_detection_callback(msg):
 			'tag_6'	
 		) 
 		camera_rgb_frame_to_tag_pose = transformer.transformPose('camera_rgb_frame', robot_to_tag_pose)
-		print camera_rbg_frame_to_tag_pose
-
 
 tag_detection_sub = rospy.Subscriber('/tag_detections', AprilTagDetectionArray, tag_detection_callback)
 br = tf.TransformBroadcaster()
