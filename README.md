@@ -40,72 +40,65 @@ The user is currently controlling the robot via teleoperation
 Below are all the nodes used within the campus rover, with documentation for usage.
 
 ## teleop
-Allows the campus rover to be controlled via teleop.
+Allows the campus rover to be controlled via teleop. Pressing the keys 'a','w','x','d' lets the robot move leftward, forward, rightward, and backward respectively. These keys also hand the control to the teleop if not already in it. 's' or space key stops the robot. It is able to do so by publishing to the in-built `cmd_vel_mux/input/teleop`. In addition, it updates the `campusrover/state` to signify, or update, whether the robot is in teleop or not.
 
 #### Publishers
 
-* `teleop`
+* `cmd_vel_mux/input/teleop`
 	* Type: `Twist`
-* `teleop/state`
+
+* `campusrover/state`
 	* Type: `Int32`
  
 #### Subscribers
-none
-
-
-## mux
-Subscribes to the `state` node to determine the current state of the robot (teleoping or navigating). Based on the state, it publishes to `/driver` either a teleop twist or a navigation twist. 
-
-#### Publishers
-
-* `mux`
-	* Type: `Twist` 
-
-#### Subscribers
-
-* `state`
+* `campusrover/state`
 	* Type: `Int32`
-* `fake_navigation`
-	* Type: `Twist`
-* `teleop`
-	* Type: `Twist`
 
-## driver
-Recieves a twist from `mux` that it publishes to `cmd_vel` 
-
-#### Publishers
-
-* `cmd_vel`
-	* Type: `Twist` 
-
-#### Subscribers
-
-* `mux`
-	* Type: `Twist`
 
 ## state
-Subscribes to the `teleop` and `fake_navigation`. Currently, it receives either 0 or 1 telling it whether the robot is teleoping or navigating.
+The state node holds the current state of the robot. It publishes and subscribes to itself. The integers and states defined above correspond to the different states that the robot can take. The state node is also critical for ensuring proper transition between robot states, restrictions on whether a certain command (eg. start teleoping) can happen at any time, information for other nodes and the user, and for feedback to the user.
 
-0 = teleop
-1 = navigate
 
 #### Publishers
 
-* `state`
+* `campusrover/state`
 	* Type: `Int32` 
 
 #### Subscribers
 
-* `teleop/state`
-	* Type: `Int32`
+* `campusrover/state`
+	* Type: `Int32` 
 
-## fake_navigation
-A placeholder for navigation algorithm. Currently, drives straight only.
 
+## tag_localization
 
 #### Publishers
-* `fake_navigation`
-	* Type: `Twist` 
+
+* `/initialpose`
+	* Type: `PoseStampedWithCovariance`
 
 #### Subscribers
-none
+
+* `/tag_detections`
+	* Type: `AprilTagDetectionArray`
+
+
+## robot_vitals
+Contains some information about the laptop status as well as the robot for information purposes to the user. Similarly, it also feeds information to other nodes that can be used for various purposes (eg. robot battery state to determine if the robot's state should be in low-charge).
+
+#### Publishers
+
+* `campusrover/laptop_battery`
+	* Type: `Float32`
+* `campusrover/robot_battery`
+	* Type: `Float32`
+* `campusrover/laptop_charging`
+	* Type: `Bool`
+* `campusrover/robot_charging`
+	* Type: `Bool`
+
+#### Subscribers
+
+* `Diagnostics_agg`
+	* Type: `DiagnosticArray`
+
