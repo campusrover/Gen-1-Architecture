@@ -115,7 +115,7 @@ if __name__=="__main__":
                 target_angular_vel  = 0
                 control_angular_vel = 0
                 print vels(0, 0)
-                #state_pub.publish(6)            	
+                #state_pub.publish(6)            	            	
             else:
                 if (key == '\x03'):
                     break
