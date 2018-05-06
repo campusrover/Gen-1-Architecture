@@ -92,30 +92,30 @@ if __name__=="__main__":
             if key == 'w' :
                 target_linear_vel = target_linear_vel + 0.01
                 status = status + 1
-                state_pub.publish(0)
+                state_pub.publish(8)
                 print vels(target_linear_vel,target_angular_vel)
             elif key == 'x' :
                 target_linear_vel = target_linear_vel - 0.01
                 status = status + 1
-                state_pub.publish(0)
+                state_pub.publish(8)
                 print vels(target_linear_vel,target_angular_vel)
             elif key == 'a' :
                 target_angular_vel = target_angular_vel + 0.1
                 status = status + 1
-                state_pub.publish(0)
+                state_pub.publish(8)
                 print vels(target_linear_vel,target_angular_vel)
             elif key == 'd' :
                 target_angular_vel = target_angular_vel - 0.1
                 status = status + 1
                 print vels(target_linear_vel,target_angular_vel)
-                state_pub.publish(0)
+                state_pub.publish(8)
             elif key == ' ' or key == 's' :
                 target_linear_vel   = 0
                 control_linear_vel  = 0
                 target_angular_vel  = 0
                 control_angular_vel = 0
                 print vels(0, 0)
-                state_pub.publish(6)            	
+                state_pub.publish(0)            	
             else:
                 if (key == '\x03'):
                     break
