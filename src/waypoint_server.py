@@ -10,11 +10,8 @@ import os
 rospy.init_node('waypoint_server')
 
 def waypoint_list(arg):
-	print "==="
-	print arg
-	print "==="
 	dir_path = os.path.dirname(os.path.realpath('waypoints.json'))
-	data = json.load(open(dir_path + '/campus_rover/waypoints.json'))
+	data = json.load(open('/home/turtlebot/turtlebot_ws/src/campus_rover/src/waypoints.json'))
 	waypoints = []
 	for waypoint in data:
 	
@@ -22,7 +19,7 @@ def waypoint_list(arg):
 		location = waypoint['location']
 		
 		pos = Point(location['x'], location['y'], location['z'])
-		orientation = Quaternion(0, 0, 0, 0)
+		orientation = Quaternion(0, 0, 0, 1)
 		pose = Pose(pos, orientation)
 		
 		header = std_msgs.msg.Header()

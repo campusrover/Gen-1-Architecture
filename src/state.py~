@@ -20,6 +20,7 @@ def state_callback(msg):
 		else:
 			log_pub.publish('Unable to convert from state %s to state %s' % (current_state, state))
 
+	print (current_state)
 	state_pub.publish(current_state)
 
 teleop_sub = rospy.Subscriber('/campus_rover/state', Int32, state_callback)

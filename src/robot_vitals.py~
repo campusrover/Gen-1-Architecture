@@ -19,11 +19,11 @@ def sensors_callback(msg):
 			for value in status.values:
 				if value.key == 'Percent':
 					robot_battery = float(value.value)
-				elif value.key == "Charging State":
-					if value.value == "Trickle Charging" or value.value == "Full Charging":
-						charging = True
-					else:
-						charging = False
+		elif value.key == "Charging State":
+			if value.value == "Trickle Charging" or value.value == "Full Charging":
+				charging = True
+			else:
+				charging = False
 		elif status.name == "/Power System/Laptop Battery":
 			for value in status.values:
 				laptop_battery_status[value.key]=value.value

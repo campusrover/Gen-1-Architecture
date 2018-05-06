@@ -1,17 +1,17 @@
 [
 	{
-		"name": "Shwartz 103",
+		"name": "Please work",
 		"location": {
-			"x": 2.5,
-			"y": 0.5,
+			"x": -6,
+			"y": 2.2,
 			"z": 0
 		}
 	},
 	{
-		"name": "Schwartz Lobby",
+		"name": "robotics lab_2",
 		"location": {
-			"x": -4.5,
-			"y": 1.3,
+			"x": 2.6,
+			"y": 0,
 			"z": 0
 		}
 	},
