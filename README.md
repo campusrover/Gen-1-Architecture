@@ -45,14 +45,14 @@ Allows the campus rover to be controlled via teleop. Pressing the keys 'a','w','
 #### Publishers
 
 * `cmd_vel_mux/input/teleop`
-	* Type: `Twist`
+* Type: `Twist`
 
 * `campusrover/state`
-	* Type: `Int32`
- 
+* Type: `Int32`
+
 #### Subscribers
 * `campusrover/state`
-	* Type: `Int32`
+* Type: `Int32`
 
 
 ## state
@@ -61,12 +61,12 @@ The state node holds the current state of the robot. It publishes and subscribes
 #### Publishers
 
 * `campusrover/state`
-	* Type: `Int32` 
+* Type: `Int32`
 
 #### Subscribers
 
 * `campusrover/state`
-	* Type: `Int32` 
+* Type: `Int32`
 
 
 ## tag_localization
@@ -75,12 +75,12 @@ Uses april tags to localize the robot. When a tag is detected, the robot's relat
 #### Publishers
 
 * `/initialpose`
-	* Type: `PoseStampedWithCovariance`
+* Type: `PoseStampedWithCovariance`
 
 #### Subscribers
 
 * `/tag_detections`
-	* Type: `AprilTagDetectionArray`
+* Type: `AprilTagDetectionArray`
 
 
 ## robot_vitals
@@ -89,16 +89,26 @@ Contains some information about the laptop status as well as the robot for infor
 #### Publishers
 
 * `campusrover/laptop_battery`
-	* Type: `Float32`
+* Type: `Float32`
 * `campusrover/robot_battery`
-	* Type: `Float32`
+* Type: `Float32`
 * `campusrover/laptop_charging`
-	* Type: `Bool`
+* Type: `Bool`
 * `campusrover/robot_charging`
-	* Type: `Bool`
+* Type: `Bool`
 
 #### Subscribers
 
 * `Diagnostics_agg`
-	* Type: `DiagnosticArray`
+* Type: `DiagnosticArray`
+
+
+## waypoint_server
+A service to look up all the waypoints stored in waypoints.json. Takes an empty request and returns an array of waypoints
+
+### Request
+* `Empty`
+
+### Response
+* Type: `yocs_msgs/WaypointList`
 
