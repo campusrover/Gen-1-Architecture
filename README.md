@@ -58,7 +58,6 @@ Allows the campus rover to be controlled via teleop. Pressing the keys 'a','w','
 ## state
 The state node holds the current state of the robot. It publishes and subscribes to itself. The integers and states defined above correspond to the different states that the robot can take. The state node is also critical for ensuring proper transition between robot states, restrictions on whether a certain command (eg. start teleoping) can happen at any time, information for other nodes and the user, and for feedback to the user.
 
-
 #### Publishers
 
 * `campusrover/state`
@@ -71,6 +70,7 @@ The state node holds the current state of the robot. It publishes and subscribes
 
 
 ## tag_localization
+Uses april tags to localize the robot. When a tag is detected, the robot's relative position is calculated and published to the `/initialpose` topic. In order to use this node, `continuous_detection.launch` from `aprilgtags2_ros` must also be running.
 
 #### Publishers
 
